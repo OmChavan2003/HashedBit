@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronForge Fitness</title>
+    <style>
+        /* --- CSS RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Forces footer to bottom */
+        }
+
+        /* Color Palette */
+        :root {
+            --primary-dark: #1a1a1a;
+            --accent-green: #c1ff00; /* Neon Gym Green */
+            --text-light: #ffffff;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--accent-green);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid var(--text-light);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-dark);
+            border-color: var(--accent-green);
+        }
+
+        /* --- MENUBAR --- */
+        nav {
+            background-color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-dark);
+        }
+
+        /* --- LAYOUT CONTAINER (Sidebar + Main) --- */
+        .container {
+            display: flex;
+            flex: 1; 
+            max-width: 1200px;
+            margin: 20px auto;
+            width: 95%;
+            gap: 20px;
+        }
+
+        /* --- SIDEBAR --- */
+        aside {
+            flex: 1; /* Takes up 1 part width */
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        aside h3 {
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .sidebar-widget {
+            margin-bottom: 30px;
+        }
+
+        .schedule-list li {
+            list-style: none;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .schedule-list span {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            flex: 3; /* Takes up 3 parts width */
+        }
+
+        .hero-title {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--primary-dark);
+        }
+
+        /* Card Grid System */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-dark);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            border-top: 5px solid #333;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Iron<span>Forge</span> Gym</div>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <aside>
+            <div class="sidebar-widget">
+                <h3>Opening Hours</h3>
+                <ul class="schedule-list">
+                    <li>Mon-Fri <span>5am - 11pm</span></li>
+                    <li>Saturday <span>7am - 9pm</span></li>
+                    <li>Sunday <span>8am - 8pm</span></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Current Offers</h3>
+                <p>Join this month and get <strong>50% OFF</strong> your first month of personal training!</p>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3>Contact Quick</h3>
+                <p>📞 +91 8411890063</p>
+                <p>📍 kothrud, Pune </p>
+            </div>
+        </aside>
+
+        <main>
+            <h1 class="hero-title">Forge Your Best Self</h1>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Strength Training">
+                    <div class="card-content">
+                        <h3>Strength Training</h3>
+                        <p>Access state-of-the-art free weights and resistance machines designed to build muscle mass.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Cardio Zone">
+                    <div class="card-content">
+                        <h3>Cardio Zone</h3>
+                        <p>Boost your endurance with our wide range of treadmills, ellipticals, and rowers.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1075&q=80" alt="Group Classes">
+                    <div class="card-content">
+                        <h3>Group Classes</h3>
+                        <p>Join our high-energy HIIT, Yoga, and Spin classes led by certified expert trainers.</p>
+                        <a href="#" class="btn">View Schedule</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2023 IronForge Fitness. All rights reserved. | Stronger Every Day.</p>
+    </footer>
+
+</body>
+</html>

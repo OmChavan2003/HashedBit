@@ -1,0 +1,123 @@
+/* src/App.css */
+
+/* 1. Colorful Gradient Background */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Fun gradient background */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. The Calculator Card */
+.calculator-box {
+  background-color: rgba(255, 255, 255, 0.95); /* Slight transparency */
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 350px;
+  text-align: center;
+  border: 4px solid #fff;
+}
+
+h2 {
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* 3. Input Fields */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+input {
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 18px;
+  outline: none;
+  background-color: #f9f9f9;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Change border color when clicked */
+input:focus {
+  border-color: #764ba2;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(118, 75, 162, 0.3);
+}
+
+/* 4. Colorful Buttons */
+.button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 buttons per row looks better */
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 15px;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Specific Colors for each button using nth-child */
+button:nth-child(1) { /* Plus (+) */
+  background-color: #00b894; /* Mint Green */
+}
+
+button:nth-child(2) { /* Minus (-) */
+  background-color: #ff7675; /* Salmon Red */
+}
+
+button:nth-child(3) { /* Multiply (x) */
+  background-color: #0984e3; /* Bright Blue */
+}
+
+button:nth-child(4) { /* Divide (÷) */
+  background-color: #fdcb6e; /* Sunflower Yellow */
+  color: #2d3436; /* Dark text for contrast */
+}
+
+/* Hover Effects */
+button:hover {
+  transform: translateY(-3px); /* Moves up slightly */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  filter: brightness(1.1); /* Makes it slightly brighter */
+}
+
+button:active {
+  transform: scale(0.95); /* Shrinks when clicked */
+}
+
+/* 5. Result Display */
+.result-display {
+  background: linear-gradient(to right, #a18cd1 0%, #fbc2eb 100%);
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  animation: popIn 0.3s ease-out;
+}
+
+/* Simple animation for the result */
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
