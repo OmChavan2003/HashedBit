@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS DOM Assignments</title>
+
+  <style>
+    /* --- GENERAL STYLES --- */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    
+    /* Creates a nice box for each assignment */
+    .assignment-section {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-top: 0;
+      color: #333;
+    }
+
+    button {
+      padding: 8px 14px;
+      cursor: pointer;
+      margin: 2px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input, select {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    /* --- 1. DARK THEME STYLES --- */
+    .day { background-color: white; color: black; }
+    .night { background-color: black; color: gold; }
+    .button_night { background-color: darkblue; color: white; border:none; }
+    .button_day { background-color: #eee; color: black; }
+    #app-theme { padding: 15px; border-radius: 5px; transition: 0.3s ease; }
+
+    /* --- 2. DIV CREATION STYLES --- */
+    #div-container { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .createdDiv { background-color: rgb(173, 194, 38); padding: 15px; border: 1px solid #333; border-radius: 4px; }
+
+    /* --- 4. DYNAMIC CSS STYLES --- */
+    .text-here {
+      font-size: 55px;
+      font-family: sans-serif;
+      color: black;
+      transition: all 0.2s ease;
+    }
+    #css-props {
+      background: #f4f4f4;
+      padding: 10px;
+      font-family: monospace;
+      border-radius: 4px;
+      min-height: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>JavaScript DOM Assignments</h1>
+
+  <section class="assignment-section">
+    <h2>1. Dark Theme Toggle</h2>
+    <div id="app-theme" class="day">
+      <p>I am a HashedBit student, ready to become an awesome full stack developer</p>
+      <button onclick="swapTheme()" id="swap" class="button_day">Toggle Theme</button>
+    </div>
+  </section>
+
+  <section class="assignment-section">
+    <h2>2. Dynamic Div Creation</h2>
+    <button onclick="handleCreate()">Create Div</button>
+    <div id="div-container"></div>
+  </section>
+
+  <section class="assignment-section">
+    <h2>3. Hide/Show Paragraph</h2>
+    <p id="useless-paragraph">This is a useless paragraph. Watch me disappear!</p>
+    <button onclick="toggleVisibility()">Hide/Show Paragraph</button>
+  </section>
+
+  <section class="assignment-section">
+    <h2>4. Dynamic CSS Controller</h2>
+    <div class="text-here" id="text-container">This is some example text</div>
+    <br>
+    
+    <input type="text" id="colorbox" placeholder="Enter color (e.g., red)">
+    <button id="colorchange">Change Colour</button>
+    <br><br>
+    
+    <label>Font Size: </label>
+    <input type="range" id="fontsize" min="10" max="100" value="55">
+    <br><br>
+    
+    <button id="italic" class="stylebt">Italics</button>
+    <button id="underline" class="stylebt">Underline</button>
+    <button id="bold" class="stylebt">Bold</button>
+    <br><br>
+    
+    <select id="list">
+      <option value="sans-serif">Sans-Serif</option>
+      <option value="serif">Serif</option>
+      <option value="monospace">Monospace</option>
+      <option value="cursive">Cursive</option>
+      <option value="fantasy">Fantasy</option>
+    </select>
+    <br><br>
+    
+    <button id="getstyle">Get CSS</button>
+    <p id="css-props">Click 'Get CSS' to view properties here.</p>
+  </section>
+
+
+  <script>
+    // --- TASK 1: Dark Theme ---
+    function swapTheme() {
+      const app = document.getElementById("app-theme");
+      const button = document.getElementById("swap");
+
+      app.classList.toggle("night");
+      app.classList.toggle("day");
+
+      button.classList.toggle("button_night");
+      button.classList.toggle("button_day");
+    }
+
+    // --- TASK 2: Div Creation ---
+    function createDiv(width, height, text) {
+      const container = document.getElementById("div-container");
+      const newDiv = document.createElement("div");
+      
+      newDiv.style.width = width + "px";
+      newDiv.style.height = height + "px";
+      newDiv.textContent = text;
+      newDiv.className = "createdDiv";
+      
+      container.appendChild(newDiv);
+    }
+
+    function handleCreate() {
+      // Create a nice looking box
+      createDiv(120, 50, "New Div Created!");
+    }
+
+    // --- TASK 3: Hide/Show Para ---
+    function toggleVisibility() {
+      const paragraph = document.getElementById("useless-paragraph");
+
+      if (paragraph.style.display === "none") {
+        paragraph.style.display = "block";
+      } else {
+        paragraph.style.display = "none";
+      }
+    }
+
+    // --- TASK 4: Dynamic CSS ---
+    const textNode = document.getElementById("text-container");
+
+    // Change color
+    document.getElementById("colorchange").onclick = function() {
+      const color = document.getElementById("colorbox").value;
+      textNode.style.color = color;
+    };
+
+    // Change font size
+    document.getElementById("fontsize").oninput = function() {
+      textNode.style.fontSize = this.value + "px";
+    };
+
+    // Toggle italic
+    document.getElementById("italic").onclick = function() {
+      textNode.style.fontStyle = textNode.style.fontStyle === "italic" ? "normal" : "italic";
+    };
+
+    // Toggle underline
+    document.getElementById("underline").onclick = function() {
+      textNode.style.textDecoration = textNode.style.textDecoration.includes("underline") ? "none" : "underline";
+    };
+
+    // Toggle bold
+    document.getElementById("bold").onclick = function() {
+      textNode.style.fontWeight = textNode.style.fontWeight === "bold" ? "normal" : "bold";
+    };
+
+    // Change font family
+    document.getElementById("list").onchange = function() {
+      textNode.style.fontFamily = this.value;
+    };
+
+    // Show CSS properties
+    document.getElementById("getstyle").onclick = function() {
+      // Using fallback values so it doesn't print empty strings if nothing was clicked yet
+      const currentCSS = 
+        "color: " + (textNode.style.color || "black") + "; " +
+        "font-size: " + (textNode.style.fontSize || "55px") + "; " +
+        "font-family: " + (textNode.style.fontFamily || "sans-serif") + "; " +
+        "font-style: " + (textNode.style.fontStyle || "normal") + "; " +
+        "font-weight: " + (textNode.style.fontWeight || "normal") + "; " +
+        "text-decoration: " + (textNode.style.textDecoration || "none") + ";";
+
+      document.getElementById("css-props").textContent = currentCSS;
+    };
+  </script>
+
+</body>
+</html>
